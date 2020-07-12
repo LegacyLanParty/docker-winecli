@@ -10,9 +10,11 @@ ENV WINEPREFIX="/wine" \
     PUID=0 \
     PGID=0
 
-# Install temporary packages
+# Install Wine
 RUN apt-get update && \
-    apt-get install -y curl software-properties-common apt-transport-https && \
+    apt-get install -y curl \
+                       software-properties-common \
+                       apt-transport-https && \
     dpkg --add-architecture i386 && \
     curl -fsSL https://dl.winehq.org/wine-builds/winehq.key | apt-key add - && \
     apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
@@ -23,9 +25,9 @@ RUN apt-get update && \
                                             wine-stable-i386=4.0.4~focal \
                                             xvfb \
                                             winbind && \
-    apt-get remove -y curl \
-                      software-properties-common \
-                      apt-transport-https && \
+    apt-get autoremove -y curl \
+                          software-properties-common \
+                          apt-transport-https && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf .cache/
 
