@@ -34,9 +34,13 @@ RUN apt-get update && \
 # Initialize Wine
 RUN Xvfb :1 -screen 0 320x240x24 & \
     wineboot -u
+RUN rm /tmp/.X1-lock
 
 COPY "entrypoint.sh" "/entrypoint.sh"
 RUN chmod +x /entrypoint.sh
+
+# Disable Wine debugging by default
+ENV WINEDEBUG=-all
 
 WORKDIR /app
 VOLUME /app
