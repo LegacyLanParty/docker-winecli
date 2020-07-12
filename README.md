@@ -28,3 +28,7 @@ Ethernet adapter eth0
     IPv4 address. . . . . . . . . . . : 172.17.0.2
     Default gateway . . . . . . . . . : 172.17.0.1
 ```
+
+## Thanks
+
+Inspired by the [domistyle/eldewrito container](https://hub.docker.com/r/domistyle/eldewrito).
