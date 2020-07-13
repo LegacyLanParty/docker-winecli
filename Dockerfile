@@ -4,7 +4,6 @@ FROM ubuntu:20.04
 # Set environment variables
 # WINEDLLOVERRIDES is required so wine doesn't ask any questions during setup
 ENV WINEPREFIX="/wine" \
-    WINEDLLOVERRIDES="mscoree,mshtml=" \
     DISPLAY=:1 \
     DEBIAN_FRONTEND=noninteractive \
     PUID=0 \
@@ -33,17 +32,18 @@ RUN apt-get update && \
 
 # Initialize Wine
 RUN Xvfb :1 -screen 0 320x240x24 & \
-    wineboot -u
+    WINEDLLOVERRIDES="mscoree,mshtml=" wineboot -u
 RUN rm /tmp/.X1-lock
-
-COPY "entrypoint.sh" "/entrypoint.sh"
-RUN chmod +x /entrypoint.sh
 
 # Disable Wine debugging by default
 ENV WINEDEBUG=-all
 
+# Copy our entrypoint
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
+# Set up workdir/volumes
 WORKDIR /app
 VOLUME /app
 
-CMD ["wine"]
-ENTRYPOINT ["/entrypoint.sh"]
