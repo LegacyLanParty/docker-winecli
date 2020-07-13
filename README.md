@@ -4,30 +4,16 @@ This container is useful for running Windows apps that are either headless, or C
 
 ## Example
 
+```shell
+$ docker run -it --rm legacylanparty/winecli:latest cmd.exe
+Microsoft Windows 6.1.7601 (4.0.4)
+
+Z:\app>exit
 ```
-04:29 $ docker run -it --rm legacylanparty/winecli:latest ipconfig
-Ethernet adapter lo
 
-    Connection-specific DNS suffix. . :
-    IPv4 address. . . . . . . . . . . : 127.0.0.1
-    Default gateway . . . . . . . . . :
+## Details
 
-Unknown adapter tunl0
-
-    Connection-specific DNS suffix. . :
-    Default gateway . . . . . . . . . :
-
-Unknown adapter ip6tnl0
-
-    Connection-specific DNS suffix. . :
-    Default gateway . . . . . . . . . :
-
-Ethernet adapter eth0
-
-    Connection-specific DNS suffix. . :
-    IPv4 address. . . . . . . . . . . : 172.17.0.2
-    Default gateway . . . . . . . . . : 172.17.0.1
-```
+This container starts with Ubuntu 20.04 and then installs Wine 4.0.4 on top of it. It uses Xvfb to create a virtual X console, which allows Windows apps to draw visual elements _somewhere_, although you can't interact with them. This makes it so that you can use CLI apps that have trouble running when the Windows Desktop doesn't exist.
 
 ## Thanks
 
