@@ -2,7 +2,7 @@
 
 This container is useful for running Windows apps that are either headless, or CLI only.
 
-## Exmaple
+## Example
 
 ```
 04:29 $ docker run -it --rm legacylanparty/winecli:latest ipconfig
